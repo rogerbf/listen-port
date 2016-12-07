@@ -12,9 +12,11 @@ const execute = (query, lsof) => {
   )
 }
 
-export default (query, externaLsof) => {
-  const lsof = externaLsof || nativeLsof
-  return (typeof (query) === `string` || typeof (query) === `number`)
-  ? execute(query, lsof)
-  : Promise.reject(new TypeError(`expected COMMAND as string or PID as number`))
+export default (query, injectedLsof) => {
+  const lsof = injectedLsof || nativeLsof
+  return (
+    (typeof (query) === `string` || typeof (query) === `number`)
+    ? execute(query, lsof)
+    : Promise.reject(new TypeError(`expected COMMAND as string or PID as number`))
+  )
 }
