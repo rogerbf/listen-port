@@ -3,8 +3,6 @@ import parseColumns from 'parse-columns'
 import filter from './library/filter'
 import extractPort from './library/extractPort'
 
-const err = new TypeError(`expected COMMAND as string or PID as number`)
-
 const execute = (query, lsof) => {
   return (
     lsof()
@@ -18,5 +16,5 @@ export default (query, externaLsof) => {
   const lsof = externaLsof || nativeLsof
   return (typeof (query) === `string` || typeof (query) === `number`)
   ? execute(query, lsof)
-  : Promise.reject(err)
+  : Promise.reject(new TypeError(`expected COMMAND as string or PID as number`))
 }
