@@ -13,4 +13,9 @@ test(`extractPort`, () => {
     { NAME: `127.0.0.1:9050 (LISTEN)` },
     { NAME: `127.0.0.1:9055 (LISTEN)` }
   ])).toEqual([ 9050, 9055 ])
+
+  expect(extractPort([
+    { NAME: `127.0.0.1:9050 (LISTEN)` },
+    { NAME: `127.0.0.1:9050 (LISTEN)` }
+  ])).toEqual(9050)
 })
